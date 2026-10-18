@@ -1,0 +1,55 @@
+Activity 5: Troubleshooting and Emergency Fixes
+Name: John Jeffrey M. Cacho
+
+1. Unstaging an Accidentally Added .env
+Command: 
+git restore --staged .env
+Explanation: Removes .env from the staging area, but the file and its contents stay on your computer, so it won’t be committed.
+
+2. Fixing the Latest Unpushed Commit Message
+Command: 
+git commit --amend -m "Fixed authentication typo"
+Explanation: Rewrites the message of the most recent commit instead of making a new one. Use it only before pushing, since it changes the commit.
+
+3. Adding a Missed CSS File to the Previous Commit
+Commands:
+git add styles.css
+git commit --amend --no-edit
+Explanation: The first command stages styles.css. The second folds it into the previous commit, and --no-edit keeps the original message.
+
+4. Throwing Away Uncommitted Edits in index.html
+Command: 
+git restore index.html
+Explanation: Throws away the unstaged edits and returns index.html to how it looked at the last commit. The discarded changes can’t easily be recovered.
+
+5. Transferring Three Unpushed Commits from main to a New Branch
+Commands:
+git branch new-feature
+git reset HEAD~3 --hard
+git checkout new-feature
+Explanation: The first command creates new-feature at the current commit, so the 3 commits are saved. The second moves main back 3 commits. The third switches you to new-feature to continue working.
+
+6. Saving Commits Made in Detached HEAD
+Command: 
+git switch -c recovery-branch
+Explanation: Creates a new branch at your current commit and switches to it, so the commits made in detached HEAD are no longer lost when you switch away.
+
+7. Reversing a Faulty Commit Already on the Remote
+Command: 
+git revert <buggy-commit-hash>
+Explanation: Creates a new commit that reverses the changes of the buggy one, without rewriting shared history. Replace <buggy-commit-hash> with the actual hash from git log.
+
+8. Restoring a Deleted Branch Using git reflog
+Command: 
+git branch <deleted-branch-name> <commit-hash>
+Explanation: Recreates the deleted branch at the commit where its work was last recorded. Find that hash with git reflog, then replace both placeholders.
+
+9. Staging Files Deleted Outside Git
+Command: 
+git add -u
+Explanation: Stages changes to tracked files, including the deletions you made in File Explorer. It does not stage new untracked files.
+
+10. Removing the testing-junk Branch from the Remote
+Command: 
+git push origin --delete testing-junk
+Explanation: Deletes testing-junk from the remote repository (origin) so collaborators no longer see it. It does not delete a local branch with the same name.
